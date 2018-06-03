@@ -1,5 +1,12 @@
 <?php
-foreach(array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
+
+$autoload = array_reduce(range(1, 3), function($d, $v) {
+    $d[] = __DIR__ . '/'.str_repeat('../', $v).'autoload.php';
+    return $d;
+
+}, []);
+
+foreach($autoload as $file) {
     if (file_exists($file)) {
         define('PHPUNIT_COMPOSER_INSTALL_CUS', $file);
         break;

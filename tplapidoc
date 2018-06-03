@@ -1,0 +1,55 @@
+#!/bin/env php
+
+<?php
+
+foreach(array(__DIR__ . '/../../autoload.php', __DIR__ . '/../vendor/autoload.php', __DIR__ . '/vendor/autoload.php') as $file) {
+    if (file_exists($file)) {
+        define('PHPUNIT_COMPOSER_INSTALL', $file);
+        break;
+    }
+}
+
+unset($file);
+
+if (!defined('PHPUNIT_COMPOSER_INSTALL')) {
+    fwrite(
+        STDERR,
+        'You need to set up the project dependencies using Composer:' . PHP_EOL . PHP_EOL .
+        '    composer install' . PHP_EOL . PHP_EOL .
+        'You can learn all about Composer on https://getcomposer.org/.' . PHP_EOL
+    );
+    die(1);
+}
+
+include PHPUNIT_COMPOSER_INSTALL;
+
+try {
+
+    $argv = @$_SERVER['argv'];
+    unset($argv[0]);
+    if(!$argv) {
+        throw new Exception('Parameter error.');
+    }
+    $src = @$argv[1];
+    $dst = @$argv[2];
+
+    \TplApidoc\TplApidoc::factory('markdown')
+        ->setSrc($src)
+        ->setDst($dst)
+        ->doc();
+
+    fwrite(
+        STDOUT,
+        "done" . PHP_EOL
+    );
+    die(0);
+
+} catch(\Exception $e) {
+    fwrite(
+        STDERR,
+        '=================================================' . PHP_EOL . PHP_EOL .
+        '| [usage] ./tplapidoc src_dir/demo.php dist_dir |' . PHP_EOL . PHP_EOL . 
+        "| \033[31m".$e->getMessage()." \033[0m                             |" . PHP_EOL . PHP_EOL .
+        '=================================================' . PHP_EOL . PHP_EOL
+    );
+}

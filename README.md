@@ -1,13 +1,18 @@
 #### 概述
-tplapidoc 是自动化文档接口生成工具。基于自定义模板生产api接口文档。
+适用于php项目的 tplapidoc 是自动化文档接口生成工具。基于自定义模板生产api接口文档。
 
 #### 安装 
 ```bash
+$ mkdir /data1
 $ cd /data1
 $ composer require itititi/tplapidoc
 ```
 
 #### 使用
+普通方式
+[usage] cmd src dst
+示例：/data1/vendor/bin/tplapidoc /data1/src/Demo.php /data1/dst
+
 建议写成shell脚本方便使用，如下：
 ```bash
 $ vim apidoc.sh
@@ -81,9 +86,7 @@ class Demo extends A {
 | succ/fail | 详见：response |
 
 ### response
-```javascript
 @return
-```
 ```
 
 生成的文档文件
@@ -113,7 +116,6 @@ class Demo extends A {
 | succ/fail | 详见：response |
 
 ### response
-```javascript
 // succ
 {
    retcode: 2000000,
@@ -124,4 +126,6 @@ class Demo extends A {
    retcode: '错误编码',
    msg: '错误信息'
 }
-```
+
+#### 寄言
+目前只实现了基于gitlab上wiki markdown语法格式。欢迎关注到该项目的同学贡献自己的一份力量。

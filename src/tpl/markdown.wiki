@@ -1,0 +1,27 @@
+#### 接口名称
+@name
+
+#### 接口描述
+@description
+
+#### 基本信息
+| 属性 | 内容 |
+| -------- | -------- |
+| Url | Path+@path |
+| Method | @method |
+| Charset | UTF-8 |
+
+#### 请求参数
+| 参数 | 类型 | 必传 | 备注 | 
+| - | - | - | - | - |
+@param
+
+#### 结果返回
+| 状态 | 内容 |
+| -------- | -------- |
+| succ/fail | 详见：response |
+
+### response
+```javascript
+@return
+```

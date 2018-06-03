@@ -11,6 +11,7 @@ $ composer require itititi/tplapidoc
 ### 使用
 #### 普通方式
 [usage] cmd src dst
+
 示例：/data1/vendor/bin/tplapidoc /data1/src/Demo.php /data1/dst
 
 #### 建议写成shell脚本方便使用，如下：

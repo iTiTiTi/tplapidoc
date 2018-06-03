@@ -9,11 +9,11 @@ $ composer require itititi/tplapidoc
 ```
 
 ### 使用
-##### 普通方式
+#### 普通方式
 [usage] cmd src dst
 示例：/data1/vendor/bin/tplapidoc /data1/src/Demo.php /data1/dst
 
-##### 建议写成shell脚本方便使用，如下：
+#### 建议写成shell脚本方便使用，如下：
 ```bash
 $ vim apidoc.sh
 
@@ -32,7 +32,7 @@ git commit -m '更新接口'; git push
 ```
 
 ### 开发说明
-##### 解析接口来源文件
+#### 解析接口来源文件
 /data1/src/Demo.php
 ```php
 <?php
@@ -59,7 +59,7 @@ class Demo extends A {
     }
 ```
 
-##### 配置模板文件
+#### 配置模板文件
 /data1/vendor/itititi/tplapidoc/src/tpl/markdown.wiki
 ```bash
 #### 接口名称
@@ -89,7 +89,7 @@ class Demo extends A {
 @return
 ```
 
-##### 生成后的文档文件 </data1/dst/测试.md>
+#### 生成后的文档文件 </data1/dst/测试.md>
 ``` bash
 #### 接口名称
 测试

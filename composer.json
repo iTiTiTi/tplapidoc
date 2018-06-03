@@ -13,7 +13,7 @@
         }
     ],
     "bin": [
-        "tplapidoc"
+        "bin/tplapidoc"
     ],
     "autoload": {
         "psr-4": {"TplApidoc\\": "src/"}

@@ -1,7 +1,6 @@
 {
     "name": "itititi/tplapidoc",
     "description": "基于自定义模板，生成你想要的api文档。简单易用且具备可拓展性。",
-    "version": "1.0.0",
     "keywords": ["php", "tplapidoc", "api", "doc"],
     "type": "library",
     "license": "MIT",
@@ -17,7 +16,6 @@
         "psr-4": {"TplApidoc\\": "src/"}
     },
     "require": {
-        "php": ">=7.0.0" 
     },
     "require-dev": {
         "phpunit/phpunit": "@stable" 

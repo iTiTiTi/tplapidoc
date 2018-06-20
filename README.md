@@ -20,15 +20,20 @@ $ vim apidoc.sh
 
 #!/bin/bash
 
+msg='更新接口'
+if test ! -z $1 ;then
+    msg=$1
+fi
+
 src=/data1/src/Demo.php
 dst=/data1/dst/
 cmd=/data1/vendor/bin/tplapidoc 
 
-cd $dst; find . ! -name '公共信息.md' -exec git rm {} \;
+cd $dst; find $dst ! -name '公共信息.md' -type f -exec rm -f {} \;
 $cmd $src $dst
 
 git add -A .
-git commit -m '更新接口'; git push
+git commit -m "$msg"; git push
 
 ```
 

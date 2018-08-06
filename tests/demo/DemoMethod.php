@@ -1,8 +1,8 @@
 <?php
 
-class Demo extends A {
+class DemoMethod extends A {
     /**
-     * @name 测试
+     * @name 测试method
      * @description 无
      * @param id int n 唯一id
      * @param name string n 姓名

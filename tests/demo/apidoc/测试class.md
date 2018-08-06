@@ -1,5 +1,5 @@
 #### 接口名称
-测试
+测试class
 
 #### 接口描述
 无
@@ -7,7 +7,7 @@
 #### 基本信息
 | 属性 | 内容 |
 | -------- | -------- |
-| Url | Path+/demo/test |
+| Url | Path+/test/api/demo |
 | Method | @method |
 | Charset | UTF-8 |
 
@@ -35,5 +35,5 @@
    retcode: '错误编码',
    msg: '错误信息'
 }
-     
+ 
 ```

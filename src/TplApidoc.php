@@ -8,7 +8,7 @@ class TplApidoc {
 
     public static function factory($class) {
         if(!isset(self::$_classStore)) {
-            $className = __namespace__.'\\'.ucfirst($class);
+            $className = __namespace__.'\\'.$class;
             if(!class_exists($className)) {
                 throw new \Exception('module not exists.');
             }

@@ -2,7 +2,10 @@
 
 namespace TplApidoc;
 
-class Markdown extends Doc implements IDoc {
+/**
+ * 针对类注释
+ */
+class MarkdownClass extends TplClass implements IDoc {
 
     public function getTpl() {
         return file_get_contents(__DIR__.'/tpl/markdown.wiki');
@@ -34,8 +37,6 @@ class Markdown extends Doc implements IDoc {
     }
 
     protected function _path($v) {
-        $class_name = str_replace('controller', '', strtolower($v['class']));
-        $method_name = str_replace('action', '', strtolower($v['method']));
-        return '/'.$class_name.'/'.$method_name;
+        return $v[0][1];
     }
 }

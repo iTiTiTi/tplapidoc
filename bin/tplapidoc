@@ -39,7 +39,12 @@ try {
     $src = @$argv[1];
     $dst = @$argv[2];
 
-    \TplApidoc\TplApidoc::factory('markdown')
+    if(is_dir($src)) {
+        $name = 'MarkdownClass';
+    } else {
+        $name = 'MarkdownMehtod';
+    }
+    \TplApidoc\TplApidoc::factory($name)
         ->setSrc($src)
         ->setDst($dst)
         ->doc();

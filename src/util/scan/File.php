@@ -61,9 +61,9 @@ class File {
         $dir	= dir($path);
         while ($item = $dir->read()) {
             $tmp = $path. DIRECTORY_SEPARATOR .$item;
-            if (is_file($tmp)) {
+            if (is_file($tmp) && preg_match('/\.php$/', $tmp)) {
                 self::$ls[] = $path.DIRECTORY_SEPARATOR.$item;
-            } else {
+            } elseif(is_dir($tmp)) {
                 if ($item != '.' && $item != '..') {
                     self::filelist($tmp, $deeplimit, $deep, $fullpath.$separator.$item, $separator);
                 }

@@ -24,8 +24,20 @@ class MarkdownClass extends DocClass implements IDoc {
         }, '');
     }
 
+    private static $orgin_dst = '';
     protected function _name($v) {
-        return $v[0][1];
+        if(!self::$orgin_dst) {
+            self::$orgin_dst = $this->getDst();
+        }
+        $name = $v[0][1];
+        $pos = iconv_strrpos(rtrim($name, '/'), '/');
+        if($pos === false) {
+            $this->setDst(self::$orgin_dst);
+        } else {
+            $this->setDst(self::$orgin_dst . DIRECTORY_SEPARATOR . iconv_substr($name, 0, $pos));
+            $name = iconv_substr($name, $pos+1);
+        }
+        return $name;
     }
 
     protected function _method($v) {

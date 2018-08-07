@@ -15,38 +15,18 @@ class Scan {
      * @todo 相同的dir，不同的rule的处理，速度很慢，需要做cache
      *
      * @param $dir
-     * @param array $rule
      * @return array
      * @throws Exception
      */
-    public static function classes($dir, array $rule=array(), $deeplimit=1) {
+    public static function classes($dir, $deeplimit=20) {
         $dir = self::filter($dir);
 
-        $key = md5(implode('|', $dir));
-
-        if (isset(self::$list[$key])) {
-            return self::$list[$key];
-        }
-
-        self::$list[$key] = array();
         // 目录的文件列表
         $ls = array();
         foreach ($dir as $d) {
-            if ($rule[scan\Reflecation::USE_AUTOLOAD]) {
-                $ls = array_merge($ls, scan\File::filelist($d, $deeplimit));
-            } else {
-                $ls = array_merge($ls, scan\File::filelist($d, $deeplimit, 0, '', '/'));
-            }
+            $ls = array_merge($ls, scan\File::filelist($d, $deeplimit));
         }
-        foreach($ls as $v) {
-            $tmp = scan\Reflecation::classes($v, $rule);
-            // 过滤非控制器
-            if (is_array($tmp)) {
-                self::$list[$key] += $tmp;
-            }
-        }
-
-        return self::$list[$key];
+        return $ls;
     }
 
     /**

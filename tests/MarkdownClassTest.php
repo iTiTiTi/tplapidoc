@@ -6,7 +6,7 @@ class MarkdownClassTest extends TestCase
     public function testBuildDoc()
     {
         \TplApidoc\TplApidoc::factory('MarkdownClass')
-            ->setSrc(__DIR__.'/demo/')
+            ->setSrc(__DIR__.'/demo')
             ->setDst(__DIR__.'/demo/apidoc')
             ->doc();
         $this->assertTrue(true);

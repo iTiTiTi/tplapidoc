@@ -7,7 +7,7 @@ class MarkdownMethodTest extends TestCase
     {
         \TplApidoc\TplApidoc::factory('MarkdownMethod')
             ->setSrc(__DIR__.'/demo/DemoMethod.php')
-            ->setDst(__DIR__.'/demo/apidoc/')
+            ->setDst(__DIR__.'/demo/apidoc')
             ->doc();
         $this->assertTrue(true);
     }

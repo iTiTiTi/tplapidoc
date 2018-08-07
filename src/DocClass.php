@@ -6,17 +6,14 @@ class DocClass {
 
     protected static $_comment_string = '';
 
-    private static $action_pattern = '/Action$/';
-    private static $action_suffix = 'Action';
-    private static $class_pattern = null;
-    private static $class_prefix = '';
-    private static $use_autoload = false;
-
     public function doc() {
-        $class = $this->_getClass();
-        foreach($class as $class_name) {
-            $obj = new \ReflectionClass($class_name);
-            self::$_comment_string = $obj->getdoccomment();
+        $comments = $this->_getComment();
+        foreach($comments as $comment) {
+            if(empty($comment) || !preg_match('#@path#', $comment)) {
+                continue;
+            }
+
+            self::$_comment_string = $comment;
 
             $pattern = "#(@[a-zA-Z]+\s*[a-zA-Z0-9, ()_].*)#";
             preg_match_all($pattern, self::$_comment_string, $matches, PREG_PATTERN_ORDER);
@@ -78,42 +75,17 @@ class DocClass {
         return $this->_dist;
     }
 
-    private function _getClass() {
-        $directory = $this->getSrc();
-        $a = util\Scan::classes($directory, $this->getActionRules());
-        var_dump($a);exit;
-        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        foreach($scanned_directory as $key => $val) {
-            $file = $directory.'/'.$val;
-            if(is_dir($file) || substr($val, 0, 1) == '.') {
-                unset($scanned_directory[$key]);
+    private function _getComment() {
+        $files = util\Scan::classes($this->getSrc());
+        $comments = [];
+        foreach($files as $file) {
+            $string = file_get_contents($file);
+            preg_match('#(\/\*\*.*\*\/)\s+class#ims', $string, $matches);
+            if(!$matches) {
                 continue;
             }
-            $string = file_get_contents($file);
-            $string = preg_replace('#<\?php#ims', '', $string);
-            $string = preg_replace('#extends\s+\w+\s+#i', '', $string);
-            eval($string);
-            preg_match('/class\s+(\w+)\s+[{]?/', $string, $matches);
-
-            $scanned_directory[$key] = '\\'.$matches[1];
+            $comments[] = $matches[1];
         }
-        return $scanned_directory;
-    }
-
-    /**
-     * 获取 action 的规则
-     * @return array
-     */
-    private function getActionRules() {
-        return array(
-            'classes' => self::$class_pattern,
-            'class_prefix' => self::$class_prefix,
-            'methods' => self::$action_pattern,
-            'use_autoload' => self::$use_autoload,
-        );
-    }
-
-    private function _recursion($directory) {
-        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
+        return $comments;
     }
 }

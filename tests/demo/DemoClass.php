@@ -2,7 +2,7 @@
 
 /**
  * @path /test/api/demo
- * @name 测试class
+ * @name 活动/测试class
  * @description 无
  * @param id int n 唯一id
  * @param name string n 姓名

@@ -63,7 +63,7 @@ try {
     fwrite(
         STDERR,
         '=================================================' . PHP_EOL . PHP_EOL .
-        '| [usage] ./tplapidoc src_dir/demo.php dist_dir |' . PHP_EOL . PHP_EOL . 
+        '| [usage] ./tplapidoc src_dir dist_dir          |' . PHP_EOL . PHP_EOL . 
         "| \033[31m".$e->getMessage()." \033[0m                             |" . PHP_EOL . PHP_EOL .
         '=================================================' . PHP_EOL . PHP_EOL
     );

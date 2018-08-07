@@ -13,7 +13,6 @@ foreach($autoload as $file) {
         break;
     }
 }
-
 unset($file);
 
 if (!defined('PHPUNIT_COMPOSER_INSTALL_CUS')) {

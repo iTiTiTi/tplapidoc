@@ -5,7 +5,7 @@ namespace TplApidoc;
 /**
  * 针对类里函数方法注释
  */
-class MarkdownMethod extends TplMethod implements IDoc {
+class MarkdownMethod extends DocMethod implements IDoc {
 
     public function getTpl() {
         return file_get_contents(__DIR__.'/tpl/markdown.wiki');

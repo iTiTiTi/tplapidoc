@@ -5,7 +5,7 @@ namespace TplApidoc;
 /**
  * 针对类注释
  */
-class MarkdownClass extends TplClass implements IDoc {
+class MarkdownClass extends DocClass implements IDoc {
 
     public function getTpl() {
         return file_get_contents(__DIR__.'/tpl/markdown.wiki');

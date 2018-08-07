@@ -1,6 +1,7 @@
 <?php
 
 $autoload = array_reduce(range(1, 3), function($d, $v) {
+    $d[] = __DIR__ . '/'.str_repeat('../', $v).'autoload.php';
     $d[] = __DIR__ . '/'.str_repeat('../', $v).'vendor/autoload.php';
     return $d;
 

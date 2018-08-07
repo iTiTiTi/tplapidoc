@@ -1,3 +1,4 @@
 vendor/
-*.sw*
+.*.sw*
 composer.lock
+.ide

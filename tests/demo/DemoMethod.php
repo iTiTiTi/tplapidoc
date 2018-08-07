@@ -1,6 +1,6 @@
 <?php
 
-class DemoMethod extends A {
+class DemoMethod extends DemoBase {
     /**
      * @name 测试method
      * @description 无

@@ -2,14 +2,15 @@
 
 namespace TplApidoc;
 
-class TplClass {
+class DocMethod {
     protected static $_comment_string = '';
 
     public function doc() {
         $class = $this->_getClass();
-        foreach($class as $class_name) {
-            $obj = new \ReflectionClass($class_name);
-            self::$_comment_string = $obj->getdoccomment();
+        $obj = new \ReflectionClass($class);
+
+        foreach($obj->getMethods() as $j) {
+            self::$_comment_string = $obj->getMethod($j->name)->getdoccomment();
 
             $pattern = "#(@[a-zA-Z]+\s*[a-zA-Z0-9, ()_].*)#";
             preg_match_all($pattern, self::$_comment_string, $matches, PREG_PATTERN_ORDER);
@@ -20,7 +21,7 @@ class TplClass {
                 unset($v_r[0]);
                 $n[$k][] = $v_r;
                 return $n;
-            }, []);
+            }, ['@path'=>['class'=>$j->class, 'method'=>$j->name]]);
 
             $replace = [];
             foreach($n as $k => $v) {
@@ -31,7 +32,6 @@ class TplClass {
             if(empty($n['@name']) && empty($n['@description'])) {
                 continue;
             }
-
             $wiki = str_replace(array_keys($replace), array_values($replace), $this->getTpl());
             $dst = $this->getDst().'/'.$replace['@name'].'.md';
             file_put_contents($dst, $wiki);
@@ -41,11 +41,11 @@ class TplClass {
     /** @var string $_src */
     private $_src = '';
 
-    public function setSrc($path) {
-        if(!file_exists($path)) {
-            throw new \Exception('src path not exists.', 4000004);
+    public function setSrc($file) {
+        if(!file_exists($file)) {
+            throw new \Exception('src file not exists.', 4000004);
         }
-        $this->_src = $path;
+        $this->_src = $file;
         return $this;
     }
 
@@ -72,22 +72,12 @@ class TplClass {
     }
 
     private function _getClass() {
-        $directory = $this->getSrc();
-        $scanned_directory = array_diff(scandir($directory), array('..', '.'));
-        foreach($scanned_directory as $key => $val) {
-            $file = $directory.'/'.$val;
-            if(is_dir($file) || substr($val, 0, 1) == '.') {
-                unset($scanned_directory[$key]);
-                continue;
-            }
-            $string = file_get_contents($file);
-            $string = preg_replace('#<\?php#ims', '', $string);
-            $string = preg_replace('#extends\s+\w+\s+#i', '', $string);
-            eval($string);
-            preg_match('/class\s+(\w+)\s+[{]?/', $string, $matches);
-
-            $scanned_directory[$key] = '\\'.$matches[1];
-        }
-        return $scanned_directory;
+        $file = $this->getSrc();
+        $string = file_get_contents($file);
+        $string = preg_replace('#.*class#ims', 'class', $string);
+        $string = preg_replace('#extends\s+\w+\s+#i', '', $string);
+        eval($string);
+        preg_match('/class\s+(\w+)\s+[{]?/', $string, $matches);
+        return $matches[1];
     }
 }

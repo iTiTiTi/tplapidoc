@@ -18,7 +18,7 @@
  *    msg: '错误信息'
  * }
  */
-class DemoClass extends A {
+class DemoClass extends DemoBase {
     public function index() {
     }
 }

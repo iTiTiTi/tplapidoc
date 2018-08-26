@@ -40,6 +40,14 @@ class MarkdownClass extends DocClass implements IDoc {
         return $name;
     }
 
+    protected function _test($v) {
+        return $v[0][1];
+    }
+
+    protected function _prod($v) {
+        return $v[0][1];
+    }
+
     protected function _method($v) {
         return $v[0][1];
     }

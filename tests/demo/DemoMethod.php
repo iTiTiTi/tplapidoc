@@ -2,6 +2,8 @@
 
 class DemoMethod extends DemoBase {
     /**
+     * @test https://www.demo1.com
+     * @prod https://www.demo2.com
      * @name 测试method
      * @description 无
      * @param id int n 唯一id

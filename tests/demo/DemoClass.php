@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * @test https://www.demo1.com
+ * @prod https://www.demo2.com
  * @path /test/api/demo
  * @name 活动/测试class
  * @description 无

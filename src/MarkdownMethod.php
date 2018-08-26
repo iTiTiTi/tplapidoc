@@ -24,6 +24,14 @@ class MarkdownMethod extends DocMethod implements IDoc {
         }, '');
     }
 
+    protected function _test($v) {
+        return $v[0][1];
+    }
+
+    protected function _prod($v) {
+        return $v[0][1];
+    }
+
     protected function _name($v) {
         return $v[0][1];
     }

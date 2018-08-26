@@ -39,13 +39,13 @@ class Scan {
         if (is_array($dir)) {
             foreach ($dir as $d) {
                 if (!is_dir($d)) {
-                    throw new Exception('Not a directory: '.$d, -1);
+                    throw new \Exception('Not a directory: '.$d, -1);
                 }
                 $dirs[] = $d;
             }
         } else {
             if (!is_dir($dir)) {
-                throw new Exception('Not a directory: '.$dir, -1);
+                throw new \Exception('Not a directory: '.$dir, -1);
             }
             $dirs[] = $dir;
         }
